@@ -61,15 +61,27 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = ` 
+     <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    }${type}</div>
+        <div class="movements__value">${mov}</div>
+    </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -122,46 +134,68 @@ const currencies = new Map([
 
 ///////////////////////////////////////////////// FOR EACH
 
-const movements = [200, 300, -400, -500, 600];
+// const movements = [200, 300, -400, -500, 600];
+// // // using for loop
+
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`you deposited ${movement}`);
+//   } else {
+//     console.log(`you deposited ${Math.abs(movement)}`); //math.abs to remove el sign : -
+//   }
+// }
+
+// // using for each - is exactly the same
+// console.log('------FOR EACH------');
+
+// movements.forEach(function (movement) {
+//   if (movement > 0) {
+//     console.log(`you deposited ${movement}`);
+//   } else {
+//     console.log(`you deposited, you withdrew ${Math.abs(movement)}`); //math.abs to remove el sign : -
+//   }
+// });
+
+// /////////////////////////////////////////////// ENTRIES - THIS METHOD RETURNS A KEY AND VALUE
 // // using for loop
 
-for (const movement of movements) {
-  if (movement > 0) {
-    console.log(`you deposited ${movement}`);
-  } else {
-    console.log(`you deposited ${Math.abs(movement)}`); //math.abs to remove el sign : -
-  }
-}
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`you deposited ${i + 1}`);
+//   } else {
+//     console.log(`you deposited , you withdrew ${Math.abs(i + 1)}`); //math.abs to remove el sign : -
+//   }
+// }
 
-// using for each - is exactly the same
-console.log('------FOR EACH------');
+// // using for each - is exactly the same
+// console.log('------FOR EACH------');
 
-movements.forEach(function (movement) {
-  if (movement > 0) {
-    console.log(`you deposited ${movement}`);
-  } else {
-    console.log(`you deposited, you withdrew ${Math.abs(movement)}`); //math.abs to remove el sign : -
-  }
+// movements.forEach(function (move, i, arr) {
+//   if (move > 0) {
+//     console.log(`your movement number ${i + 1} you deposited ${move}`);
+//   } else {
+//     console.log(`your movement number ${i + 1} you withdrew ${Math.abs(move)}`); //math.abs to remove el sign : -
+//   }
+// });
+
+// /////////////////////////////////////////////// FOR EACH WITH MAPS AND SETS
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`the value ${value} the key ${key}`);
 });
+// output expected: USD: United States dollar, EUR, Euro, GBP, Pound sterling
 
-/////////////////////////////////////////////// ENTRIES - THIS METHOD RETURNS A KEY AND VALUE
-// using for loop
+// /////////////////////////////////////////////// SETS
 
-for (const [i, movement] of movements.entries()) {
-  if (movement > 0) {
-    console.log(`you deposited ${i + 1}`);
-  } else {
-    console.log(`you deposited , you withdrew ${Math.abs(i + 1)}`); //math.abs to remove el sign : -
-  }
-}
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EURO', 'EURO']);
 
-// using for each - is exactly the same
-console.log('------FOR EACH------');
-
-movements.forEach(function (move, i, arr) {
-  if (move > 0) {
-    console.log(`your movement number ${i + 1} you deposited ${move}`);
-  } else {
-    console.log(`your movement number ${i + 1} you withdrew ${Math.abs(move)}`); //math.abs to remove el sign : -
-  }
+// we use a throwaway parametere because the parameter key here, is useless, we changed the (value, key, map) for (value, _ , map)
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value} :${value}`);
 });
+// output expected: USD:USD, GBP:GBP, EURO:EURO
