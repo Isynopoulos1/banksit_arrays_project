@@ -223,40 +223,61 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 // INITIAL DATA
-const kateArr = [4, 1, 15, 8, 3];
-const juliaWrongArr = [3, 5, 2, 12, 7];
-const juliaArr = [...juliaWrongArr].slice(1, 3);
+// const kateArr = [4, 1, 15, 8, 3];
+// const juliaWrongArr = [3, 5, 2, 12, 7];
+// const juliaArr = [...juliaWrongArr].slice(1, 3);
 
-const dogs = kateArr.concat(juliaArr);
-// const dogs1 = [...kateArr, ...juliaArr];
-// const dogs2 = [kateArr, juliaArr].flat();
+// const dogs = kateArr.concat(juliaArr);
+// // const dogs1 = [...kateArr, ...juliaArr];
+// // const dogs2 = [kateArr, juliaArr].flat();
 
-// DEFINITIONS
-const filterCats = array => {
-  return [...array].slice(1, 3);
-};
-const mergeDogs = (array1, array2) => {
-  return array1.concat(array2);
-};
-const checkAge = array => {
-  return array.forEach(function (age, index) {
-    if (age > 3) {
-      console.log(`the dog number ${index + 1} is an adult: ${age} years`);
+// // DEFINITIONS
+// const filterCats = array => {
+//   return [...array].slice(1, 3);
+// };
+// const mergeDogs = (array1, array2) => {
+//   return array1.concat(array2);
+// };
+// const checkAge = array => {
+//   return array.forEach(function (age, index) {
+//     if (age > 3) {
+//       console.log(`the dog number ${index + 1} is an adult: ${age} years`);
+//     } else {
+//       console.log(
+//         `the dog number ${index + 1} is still a puppy 🐶: ${age} years`
+//       );
+//     }
+//   });
+// };
+
+// const main = (array1, array2) => {
+//   const correctArray1 = filterCats(array1);
+//   const correctArray2 = array2;
+//   const mergedArrays = mergeDogs(correctArray1, correctArray2);
+//   return checkAge(mergedArrays);
+// };
+
+// // INVOCATIONS
+// main([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// main([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+// SOLUTION 2
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = dogsJulia.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+
+  const dogs = dogsJuliaCorrected.concat(dogsKate);
+  console.log(dogs);
+
+  dogs.forEach(function (dog, i) {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
     } else {
-      console.log(
-        `the dog number ${index + 1} is still a puppy 🐶: ${age} years`
-      );
+      console.log(`Dog number ${i + 1} is still a puppy`);
     }
   });
 };
 
-const main = (array1, array2) => {
-  const correctArray1 = filterCats(array1);
-  const correctArray2 = array2;
-  const mergedArrays = mergeDogs(correctArray1, correctArray2);
-  return checkAge(mergedArrays);
-};
-
-// INVOCATIONS
-main([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-main([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
