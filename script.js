@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // /////////////////////////////////////////////////
 // /////////////////////////////////////////////////
@@ -263,21 +263,61 @@ GOOD LUCK 😀
 
 // SOLUTION 2
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  const dogsJuliaCorrected = dogsJulia.slice();
-  dogsJuliaCorrected.splice(0, 1);
-  dogsJuliaCorrected.splice(-2);
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   const dogsJuliaCorrected = dogsJulia.slice();
+//   dogsJuliaCorrected.splice(0, 1);
+//   dogsJuliaCorrected.splice(-2);
 
-  const dogs = dogsJuliaCorrected.concat(dogsKate);
-  console.log(dogs);
+//   const dogs = dogsJuliaCorrected.concat(dogsKate);
+//   console.log(dogs);
 
-  dogs.forEach(function (dog, i) {
-    if (dog >= 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
-    } else {
-      console.log(`Dog number ${i + 1} is still a puppy`);
-    }
+//   dogs.forEach(function (dog, i) {
+//     if (dog >= 3) {
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1} is still a puppy`);
+//     }
+//   });
+// };
+
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+
+// // /////////////////////////////////////////////// THE MAP METHOD
+
+// The map Method
+// const eurToUsd = 1.1;
+
+// // const movementsUSD = movements.map(function (mov) {
+// //   return mov * eurToUsd;
+// // });
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
+
+// const movementsDescriptions = movements.map((move, i, arr) => {
+//   if (move > 0) {
+//     return `your movement number ${i + 1} you deposited ${move}`;
+//   } else {
+//     return `your movement number ${i + 1} you withdrew ${Math.abs(move)}`; //math.abs to remove el sign : -
+//   }
+// });
+// console.log(movementsDescriptions);
+
+// // /////////////////////////////////////////////// COMPUTING USERNAMES
+const user = 'Isela Yasojara Valdez Alarcón';
+const justInitials = user
+  .toLowerCase()
+  .split(' ')
+  .map(function (name) {
+    return name[0];
   });
-};
+// .join('');
 
-checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// output expected 'i','y','v','a'
+console.log(justInitials);
+// output with join iyva
