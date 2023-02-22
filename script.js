@@ -4,36 +4,36 @@
 // /////////////////////////////////////////////////
 // // BANKIST APP
 
-// // Data
-// const account1 = {
-//   owner: 'Jonas Schmedtmann',
-//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-//   interestRate: 1.2, // %
-//   pin: 1111,
-// };
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
 
-// const account2 = {
-//   owner: 'Jessica Davis',
-//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-//   interestRate: 1.5,
-//   pin: 2222,
-// };
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
 
-// const account3 = {
-//   owner: 'Steven Thomas Williams',
-//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
-//   interestRate: 0.7,
-//   pin: 3333,
-// };
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
 
-// const account4 = {
-//   owner: 'Sarah Smith',
-//   movements: [430, 1000, 700, 50, 90],
-//   interestRate: 1,
-//   pin: 4444,
-// };
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
 
-// const accounts = [account1, account2, account3, account4];
+const accounts = [account1, account2, account3, account4];
 
 // // Elements
 // const labelWelcome = document.querySelector('.welcome');
@@ -309,15 +309,72 @@ GOOD LUCK 😀
 // console.log(movementsDescriptions);
 
 // // /////////////////////////////////////////////// COMPUTING USERNAMES
-const user = 'Isela Yasojara Valdez Alarcón';
-const justInitials = user
-  .toLowerCase()
-  .split(' ')
-  .map(function (name) {
-    return name[0];
-  });
-// .join('');
+// const user = 'Isela Yasojara Valdez Alarcón';
+// const justInitials = user
+//   .toLowerCase()
+//   .split(' ')
+//   .map(name => name[0]);
+// // .join('');
 
-// output expected 'i','y','v','a'
-console.log(justInitials);
-// output with join iyva
+// // output expected 'i','y','v','a'
+// console.log(justInitials);
+// // output with join iyva
+
+// // /////////////////////////////////////////////// callback function
+// const createUserName = function (user) {
+//   const justInitials = user
+//     .toLowerCase()
+//     .split(' ')
+//     .map(name => name[0])
+//     .join('');
+//   return justInitials;
+// };
+
+// console.log(createUserName('Benito LIMOusine'));
+
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+console.log(accounts);
+console.log(createUserName(accounts));
+
+// // /////////////////////////////////////////////// FILTER METHOD
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(deposits);
+
+// using  FOR
+const depositsFor = [];
+for (const mov of movements) {
+  if (mov > 0) {
+    depositsFor.push(mov);
+  }
+}
+console.log(depositsFor);
+
+// withdrawals for
+
+const withdrawals = [];
+for (const mov of movements) {
+  if (mov < 0) {
+    withdrawals.push(mov);
+  }
+}
+console.log(withdrawals);
+
+// withdrawals filter
+
+const withdrawalsDeposits = movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawalsDeposits);
