@@ -284,20 +284,20 @@ GOOD LUCK 😀
 
 // // /////////////////////////////////////////////// THE MAP METHOD
 
-// The map Method
+// /// The map Method
 // const eurToUsd = 1.1;
 
 // // const movementsUSD = movements.map(function (mov) {
 // //   return mov * eurToUsd;
 // // });
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const movementsUSD = movements.map(mov => mov * eurToUsd);
 
-// const movementsUSDfor = [];
-// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
-// console.log(movementsUSDfor);
+// // const movementsUSDfor = [];
+// // for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// // console.log(movementsUSDfor);
 
 // const movementsDescriptions = movements.map((move, i, arr) => {
 //   if (move > 0) {
@@ -332,45 +332,45 @@ GOOD LUCK 😀
 
 // console.log(createUserName('Benito LIMOusine'));
 
-const createUserName = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join('');
-  });
-};
-console.log(accounts);
-console.log(createUserName(accounts));
+// const createUserName = function (accs) {
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(' ')
+//       .map(name => name[0])
+//       .join('');
+//   });
+// };
+// console.log(accounts);
+// console.log(createUserName(accounts));
 
 // // /////////////////////////////////////////////// FILTER METHOD
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const deposits = movements.filter(function (mov) {
-  return mov > 0;
-});
-console.log(deposits);
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// console.log(deposits);
 
-// using  FOR
-const depositsFor = [];
-for (const mov of movements) {
-  if (mov > 0) {
-    depositsFor.push(mov);
-  }
-}
-console.log(depositsFor);
+// // using  FOR
+// const depositsFor = [];
+// for (const mov of movements) {
+//   if (mov > 0) {
+//     depositsFor.push(mov);
+//   }
+// }
+// console.log(depositsFor);
 
-// withdrawals for
+// // withdrawals for
 
-const withdrawals = [];
-for (const mov of movements) {
-  if (mov < 0) {
-    withdrawals.push(mov);
-  }
-}
-console.log(withdrawals);
+// const withdrawals = [];
+// for (const mov of movements) {
+//   if (mov < 0) {
+//     withdrawals.push(mov);
+//   }
+// }
+// console.log(withdrawals);
 
 // withdrawals filter
 
@@ -380,8 +380,8 @@ console.log(withdrawals);
 // console.log(withdrawalsDeposits);
 
 // withdrawals filter arrow function
-const withdrawalsDeposits = movements.filter(mov => mov < 0);
-console.log(withdrawalsDeposits);
+// const withdrawalsDeposits = movements.filter(mov => mov < 0);
+// console.log(withdrawalsDeposits);
 
 // // /////////////////////////////////////////////// REDUCE METHOD
 // accumulator snowball
@@ -392,32 +392,89 @@ console.log(withdrawalsDeposits);
 // });
 // console.log(balance);
 
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balance);
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
+// console.log(balance);
 
 // for refuce
 
-let balance2 = 0;
-for (const mov of movements) {
-  balance2 += mov;
-}
-console.log(balance2);
+// let balance2 = 0;
+// for (const mov of movements) {
+//   balance2 += mov;
+// }
+// console.log(balance2);
 
 // manipulating the display balance DOM with reduce
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${balance} EURO`;
-};
+// const calcDisplayBalance = function (movements) {
+//   const balance = movements.reduce((acc, cur) => acc + cur, 0);
+//   labelBalance.textContent = `${balance} EURO`;
+// };
 
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 // GETTING THE MAX VALUE WITH REDUCE
 
-const max = movements.reduce((acc, mov) => {
-  if (acc > mov) {
-    return acc;
-  } else return mov;
-}, movements[0]);
+// const max = movements.reduce((acc, mov) => {
+//   if (acc > mov) {
+//     return acc;
+//   } else return mov;
+// }, movements[0]);
 
-console.log(max);
+// console.log(max);
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+//data
+const data1 = [5, 2, 4, 1, 15, 8, 3]; //44
+const data2 = [16, 6, 10, 5, 6, 1, 4]; // 47.3
+
+// accumulator
+const calcAverageHumanAge = [];
+
+// creating the formula to turn dogs age to human age
+
+const humanAge = data2.map(age => {
+  if (age <= 2) {
+    return age * 2;
+  } else if (age > 2) {
+    return age * 4 + 16;
+  }
+});
+
+// // Exclude all dogs that are less than 18 human years old
+const adultDogs = function () {
+  for (const dog of humanAge) {
+    if (dog > 18) {
+      calcAverageHumanAge.push(dog);
+    }
+  }
+};
+adultDogs();
+console.log(calcAverageHumanAge);
+
+// store the calcAverageHumanAge function into a variable
+const calcAvg = calcAverageHumanAge;
+
+// Calculate the average human age of all adult dogs
+const avgAdultDogs = function () {
+  const avg = calcAvg.reduce((acc, cur) => acc + cur / calcAvg.length, 0);
+  console.log(`the avg is ${avg}`);
+};
+avgAdultDogs();
