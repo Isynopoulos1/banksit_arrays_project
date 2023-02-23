@@ -440,41 +440,59 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
+///////////////// SOLUTION 1
+// //data
+// const data1 = [5, 2, 4, 1, 15, 8, 3]; //44
+// const data2 = [16, 6, 10, 5, 6, 1, 4]; // 47.3
 
-//data
-const data1 = [5, 2, 4, 1, 15, 8, 3]; //44
-const data2 = [16, 6, 10, 5, 6, 1, 4]; // 47.3
+// // accumulator
+// const calcAverageHumanAge = [];
 
-// accumulator
-const calcAverageHumanAge = [];
+// // creating the formula to turn dogs age to human age
 
-// creating the formula to turn dogs age to human age
+// const humanAge = data2.map(age => {
+//   if (age <= 2) {
+//     return age * 2;
+//   } else if (age > 2) {
+//     return age * 4 + 16;
+//   }
+// });
 
-const humanAge = data2.map(age => {
-  if (age <= 2) {
-    return age * 2;
-  } else if (age > 2) {
-    return age * 4 + 16;
-  }
-});
+// // // Exclude all dogs that are less than 18 human years old
+// const adultDogs = function () {
+//   for (const dog of humanAge) {
+//     if (dog > 18) {
+//       calcAverageHumanAge.push(dog);
+//     }
+//   }
+// };
+// adultDogs();
+// console.log(calcAverageHumanAge);
 
-// // Exclude all dogs that are less than 18 human years old
-const adultDogs = function () {
-  for (const dog of humanAge) {
-    if (dog > 18) {
-      calcAverageHumanAge.push(dog);
-    }
-  }
+// // store the calcAverageHumanAge function into a variable
+// const calcAvg = calcAverageHumanAge;
+
+// // Calculate the average human age of all adult dogs
+// const avgAdultDogs = function () {
+//   const avg = calcAvg.reduce((acc, cur) => acc + cur / calcAvg.length, 0);
+//   console.log(`the avg is ${avg}`);
+// };
+// avgAdultDogs();
+
+///////////////// SOLUTION 2
+
+const avgTotal = function (ages) {
+  const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = dogAges.filter(age => age > 18);
+  const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
+  return avg;
 };
-adultDogs();
-console.log(calcAverageHumanAge);
 
-// store the calcAverageHumanAge function into a variable
-const calcAvg = calcAverageHumanAge;
+const avg1 = [5, 2, 4, 1, 15, 8, 3];
+const avg2 = [16, 6, 10, 5, 6, 1, 4];
 
-// Calculate the average human age of all adult dogs
-const avgAdultDogs = function () {
-  const avg = calcAvg.reduce((acc, cur) => acc + cur / calcAvg.length, 0);
-  console.log(`the avg is ${avg}`);
-};
-avgAdultDogs();
+const test1 = avgTotal(avg1);
+const test2 = avgTotal(avg2);
+
+console.log('test1', test1);
+console.log('test2', test2);
