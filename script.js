@@ -485,6 +485,7 @@ const avgTotal = function (ages) {
   const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
   const adults = dogAges.filter(age => age > 18);
   const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
+  // const avg = adults.reduce (( accu, age,  i, arr) => acc + age / arr. length 0)
   return avg;
 };
 
@@ -496,3 +497,12 @@ const test2 = avgTotal(avg2);
 
 console.log('test1', test1);
 console.log('test2', test2);
+
+/////////////////////////////////////// THE CHAINING METHOD
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroUsd = 1.1;
+const totalDepostitUsd = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * euroUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepostitUsd);
