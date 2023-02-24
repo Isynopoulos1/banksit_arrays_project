@@ -499,10 +499,27 @@ console.log('test1', test1);
 console.log('test2', test2);
 
 /////////////////////////////////////// THE CHAINING METHOD
+// data
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const euroUsd = 1.1;
+// console.log(movements);
+// Pipeline
 const totalDepostitUsd = movements
   .filter(mov => mov > 0)
-  .map(mov => mov * euroUsd)
+  .map((mov, i, arr) => {
+    //removing all the negative values
+    //console.log(arr);
+    return mov * euroUsd;
+    //.map(mov => mov * euroUsd)
+  })
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepostitUsd);
+
+// Display balance in the DOM
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} €`;
+};
+calcDisplaySummary(account1.movements);
