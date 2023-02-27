@@ -481,64 +481,64 @@ GOOD LUCK 😀
 
 ///////////////// SOLUTION 2
 
-const avgTotal = function (ages) {
-  const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-  const adults = dogAges.filter(age => age > 18);
-  const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
-  // const avg = adults.reduce (( accu, age,  i, arr) => acc + age / arr. length 0)
-  return avg;
-};
+// const avgTotal = function (ages) {
+//   const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+//   const adults = dogAges.filter(age => age > 18);
+//   const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
+//   // const avg = adults.reduce (( accu, age,  i, arr) => acc + age / arr. length 0)
+//   return avg;
+// };
 
-const avg1 = [5, 2, 4, 1, 15, 8, 3];
-const avg2 = [16, 6, 10, 5, 6, 1, 4];
+// const avg1 = [5, 2, 4, 1, 15, 8, 3];
+// const avg2 = [16, 6, 10, 5, 6, 1, 4];
 
-const test1 = avgTotal(avg1);
-const test2 = avgTotal(avg2);
+// const test1 = avgTotal(avg1);
+// const test2 = avgTotal(avg2);
 
-console.log('test1', test1);
-console.log('test2', test2);
+// console.log('test1', test1);
+// console.log('test2', test2);
 
-/////////////////////////////////////// THE CHAINING METHOD
-// data
+// /////////////////////////////////////// THE CHAINING METHOD
+// // data
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const euroUsd = 1.1;
-// console.log(movements);
-// Pipeline
-const totalDepostitUsd = movements
-  .filter(mov => mov > 0)
-  .map((mov, i, arr) => {
-    //removing all the negative values
-    //console.log(arr);
-    return mov * euroUsd;
-    //.map(mov => mov * euroUsd)
-  })
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(totalDepostitUsd);
+// const euroUsd = 1.1;
+// // console.log(movements);
+// // Pipeline
+// const totalDepostitUsd = movements
+//   .filter(mov => mov > 0)
+//   .map((mov, i, arr) => {
+//     //removing all the negative values
+//     //console.log(arr);
+//     return mov * euroUsd;
+//     //.map(mov => mov * euroUsd)
+//   })
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDepostitUsd);
 
-// Display balance in the DOM
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes} €`;
+// // Display balance in the DOM
+// const calcDisplaySummary = function (movements) {
+//   const incomes = movements
+//     .filter(mov => mov > 0)
+//     .reduce((acc, mov) => acc + mov, 0);
+//   labelSumIn.textContent = `${incomes} €`;
 
-  const out = movements
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  // using maths.abs to remove de negative sign
-  labelSumOut.textContent = `${Math.abs(out)}`;
+//   const out = movements
+//     .filter(mov => mov < 0)
+//     .reduce((acc, mov) => acc + mov, 0);
+//   // using maths.abs to remove de negative sign
+//   labelSumOut.textContent = `${Math.abs(out)}`;
 
-  const interes = movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
-    .filter((int, i, arr) => {
-      console.log('array', arr);
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interes}`;
-};
-calcDisplaySummary(account1.movements);
+//   const interes = movements
+//     .filter(mov => mov > 0)
+//     .map(deposit => (deposit * 1.2) / 100)
+//     .filter((int, i, arr) => {
+//       console.log('array', arr);
+//       return int >= 1;
+//     })
+//     .reduce((acc, int) => acc + int, 0);
+//   labelSumInterest.textContent = `${interes}`;
+// };
+// calcDisplaySummary(account1.movements);
 
 ///////////////////////////////////////
 // Coding Challenge #3
@@ -552,12 +552,23 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const calcAverageHumanAge = ages =>
-  ages
-    .map(age => (age <= 2 ? age * 2 : 16 + age * 4))
-    .filter(age => age > 18)
-    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+// const calcAverageHumanAge = ages =>
+//   ages
+//     .map(age => (age <= 2 ? age * 2 : 16 + age * 4))
+//     .filter(age => age > 18)
+//     .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
 
-const testAvg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-const testAvg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
-console.log('test Avg', testAvg1, testAvg2);
+// const testAvg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// const testAvg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+// console.log('test Avg', testAvg1, testAvg2);
+
+// /////////////////////////////////////// FIND METHOD
+const firstWithdrawals = movements.find(mov => mov < 0);
+console.log(firstWithdrawals);
+console.log(movements);
+console.log(accounts);
+
+// find a owner account  in accounts array using find method
+
+const accounts2 = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(accounts2);
