@@ -354,6 +354,12 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value))
+    // display UI message
+    labelWelcome.textContent = `welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+  containerApp.style.opacity = 100;
 });
 
 // // /////////////////////////////////////////////// FILTER METHOD
