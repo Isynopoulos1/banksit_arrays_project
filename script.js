@@ -284,20 +284,20 @@ GOOD LUCK 😀
 
 // // /////////////////////////////////////////////// THE MAP METHOD
 
-// /// The map Method
+/// The map Method
 // const eurToUsd = 1.1;
 
-// // const movementsUSD = movements.map(function (mov) {
-// //   return mov * eurToUsd;
-// // });
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eurToUsd;
+// });
 
-// // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const movementsUSD = movements.map(mov => mov * eurToUsd);
 
-// // const movementsUSDfor = [];
-// // for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
-// // console.log(movementsUSDfor);
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
 
 // const movementsDescriptions = movements.map((move, i, arr) => {
 //   if (move > 0) {
@@ -332,17 +332,29 @@ GOOD LUCK 😀
 
 // console.log(createUserName('Benito LIMOusine'));
 
-// const createUserName = function (accs) {
-//   accs.forEach(function (acc) {
-//     acc.username = acc.owner
-//       .toLowerCase()
-//       .split(' ')
-//       .map(name => name[0])
-//       .join('');
-//   });
-// };
-// console.log(accounts);
-// console.log(createUserName(accounts));
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+console.log(accounts);
+console.log(createUserName(accounts));
+
+// Event Handler
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  // The preventDefault() method prevents form from submitting
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+});
 
 // // /////////////////////////////////////////////// FILTER METHOD
 
