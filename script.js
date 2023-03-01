@@ -87,30 +87,31 @@ const calcDisplayBalance = function (movements) {
 
 // // Display balance in the DOM
 const calcDisplaySummary = function (acc) {
-  const incomes =
-    acc.movements?.filter(mov => mov > 0)?.reduce((acc, mov) => acc + mov, 0) ??
-    0;
+  const incomes = acc.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  0;
   labelSumIn.textContent = `${incomes}€`;
 
-  const out =
-    acc.movements?.filter(mov => mov < 0)?.reduce((acc, mov) => acc + mov, 0) ??
-    0;
+  const out = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  0;
   // using maths.abs to remove de negative sign
   labelSumOut.textContent = `${Math.abs(out)}`;
 
-  const interes =
-    acc.movements
-      ?.filter(mov => mov > 0)
-      ?.map(deposit => (deposit * acc.interestRate) / 100)
-      ?.filter((int, i, arr) => {
-        console.log('array', arr);
-        return int >= 1;
-      })
-      ?.reduce((acc, int) => acc + int, 0) ?? 0;
+  const interes = acc.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * acc.interestRate) / 100)
+    .filter((int, i, arr) => {
+      console.log('array', arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interes}`;
 };
 
-calcDisplaySummary(account1.movements);
+calcDisplaySummary(account1);
 
 const createUserName = function (accs) {
   accs.forEach(function (acc) {
@@ -151,7 +152,7 @@ btnLogin.addEventListener('click', function (e) {
   //display balance
   calcDisplayBalance(currentAccount.movements);
   // display summary
-  calcDisplaySummary(currentAccount.movements);
+  calcDisplaySummary(currentAccount);
 });
 
 /////////////////////////////////////////////////
