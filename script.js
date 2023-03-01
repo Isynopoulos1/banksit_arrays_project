@@ -360,6 +360,17 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
   containerApp.style.opacity = 100;
+
+  // clear input fields
+
+  inputLoginUsername.value = inputLoginPin.value = ' ';
+
+  // display movements
+  displayMovements(currentAccount.movements);
+  //display balance
+  calcDisplayBalance(currentAccount.movements);
+  // display summary
+  calcDisplaySummary(currentAccount.movements);
 });
 
 // // /////////////////////////////////////////////// FILTER METHOD
