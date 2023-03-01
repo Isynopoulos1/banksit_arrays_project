@@ -61,25 +61,98 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-// const displayMovements = function (movements) {
-//   containerMovements.innerHTML = '';
-//   movements.forEach(function (mov, i) {
-//     const type = mov > 0 ? 'deposit' : 'withdrawal';
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-//     const html = `
-//      <div class="movements__row">
-//       <div class="movements__type movements__type--${type}">${
-//       i + 1
-//     }${type}</div>
-//         <div class="movements__value">${mov}</div>
-//     </div>
-//     `;
-//     containerMovements.insertAdjacentHTML('afterbegin', html);
-//   });
-// };
+    const html = `
+     <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    }${type}</div>
+        <div class="movements__value">${mov}</div>
+    </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
 
-// displayMovements(account1.movements);
-// console.log(containerMovements.innerHTML);
+displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance} EURO`;
+};
+
+// // Display balance in the DOM
+const calcDisplaySummary = function (acc) {
+  const incomes =
+    acc.movements?.filter(mov => mov > 0)?.reduce((acc, mov) => acc + mov, 0) ??
+    0;
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out =
+    acc.movements?.filter(mov => mov < 0)?.reduce((acc, mov) => acc + mov, 0) ??
+    0;
+  // using maths.abs to remove de negative sign
+  labelSumOut.textContent = `${Math.abs(out)}`;
+
+  const interes =
+    acc.movements
+      ?.filter(mov => mov > 0)
+      ?.map(deposit => (deposit * acc.interestRate) / 100)
+      ?.filter((int, i, arr) => {
+        console.log('array', arr);
+        return int >= 1;
+      })
+      ?.reduce((acc, int) => acc + int, 0) ?? 0;
+  labelSumInterest.textContent = `${interes}`;
+};
+
+calcDisplaySummary(account1.movements);
+
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+// Event Handler
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  // The preventDefault() method prevents form from submitting
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value))
+    // display UI message
+    labelWelcome.textContent = `welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+  containerApp.style.opacity = 100;
+
+  // clear input fields
+
+  inputLoginUsername.value = inputLoginPin.value = ' ';
+  // to blured pin
+
+  inputLoginPin.blur();
+
+  // display movements
+  displayMovements(currentAccount.movements);
+  //display balance
+  calcDisplayBalance(currentAccount.movements);
+  // display summary
+  calcDisplaySummary(currentAccount.movements);
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -332,47 +405,6 @@ GOOD LUCK 😀
 
 // console.log(createUserName('Benito LIMOusine'));
 
-const createUserName = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join('');
-  });
-};
-console.log(accounts);
-console.log(createUserName(accounts));
-
-// Event Handler
-let currentAccount;
-
-btnLogin.addEventListener('click', function (e) {
-  // The preventDefault() method prevents form from submitting
-  e.preventDefault();
-  currentAccount = accounts.find(
-    acc => acc.username === inputLoginUsername.value
-  );
-  console.log(currentAccount);
-  if (currentAccount?.pin === Number(inputLoginPin.value))
-    // display UI message
-    labelWelcome.textContent = `welcome back ${
-      currentAccount.owner.split(' ')[0]
-    }`;
-  containerApp.style.opacity = 100;
-
-  // clear input fields
-
-  inputLoginUsername.value = inputLoginPin.value = ' ';
-
-  // display movements
-  displayMovements(currentAccount.movements);
-  //display balance
-  calcDisplayBalance(currentAccount.movements);
-  // display summary
-  calcDisplaySummary(currentAccount.movements);
-});
-
 // // /////////////////////////////////////////////// FILTER METHOD
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -433,13 +465,6 @@ btnLogin.addEventListener('click', function (e) {
 // console.log(balance2);
 
 // manipulating the display balance DOM with reduce
-
-// const calcDisplayBalance = function (movements) {
-//   const balance = movements.reduce((acc, cur) => acc + cur, 0);
-//   labelBalance.textContent = `${balance} EURO`;
-// };
-
-// calcDisplayBalance(account1.movements);
 
 // GETTING THE MAX VALUE WITH REDUCE
 
@@ -543,31 +568,6 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   })
 //   .reduce((acc, mov) => acc + mov, 0);
 // console.log(totalDepostitUsd);
-
-// // Display balance in the DOM
-// const calcDisplaySummary = function (movements) {
-//   const incomes = movements
-//     .filter(mov => mov > 0)
-//     .reduce((acc, mov) => acc + mov, 0);
-//   labelSumIn.textContent = `${incomes} €`;
-
-//   const out = movements
-//     .filter(mov => mov < 0)
-//     .reduce((acc, mov) => acc + mov, 0);
-//   // using maths.abs to remove de negative sign
-//   labelSumOut.textContent = `${Math.abs(out)}`;
-
-//   const interes = movements
-//     .filter(mov => mov > 0)
-//     .map(deposit => (deposit * 1.2) / 100)
-//     .filter((int, i, arr) => {
-//       console.log('array', arr);
-//       return int >= 1;
-//     })
-//     .reduce((acc, int) => acc + int, 0);
-//   labelSumInterest.textContent = `${interes}`;
-// };
-// calcDisplaySummary(account1.movements);
 
 ///////////////////////////////////////
 // Coding Challenge #3
