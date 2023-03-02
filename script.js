@@ -122,7 +122,7 @@ const createUserName = function (accs) {
       .join('');
   });
 };
-
+createUserName(accounts);
 // Event Handler
 let currentAccount;
 
@@ -153,6 +153,15 @@ btnLogin.addEventListener('click', function (e) {
   calcDisplayBalance(currentAccount.movements);
   // display summary
   calcDisplaySummary(currentAccount);
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const reciverAccount = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  console.log('amount , user', amount, reciverAccount);
 });
 
 /////////////////////////////////////////////////
@@ -555,7 +564,7 @@ GOOD LUCK 😀
 
 // /////////////////////////////////////// THE CHAINING METHOD
 // // data
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const euroUsd = 1.1;
 // // console.log(movements);
 // // Pipeline
@@ -593,12 +602,12 @@ GOOD LUCK 😀
 // console.log('test Avg', testAvg1, testAvg2);
 
 // /////////////////////////////////////// FIND METHOD
-const firstWithdrawals = movements.find(mov => mov < 0);
-console.log(firstWithdrawals);
-console.log(movements);
-console.log(accounts);
+// const firstWithdrawals = movements.find(mov => mov < 0);
+// console.log(firstWithdrawals);
+// console.log(movements);
+// console.log(accounts);
 
-// find a owner account  in accounts array using find method
+// // find a owner account  in accounts array using find method
 
-const accounts2 = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(accounts2);
+// const accounts2 = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(accounts2);
