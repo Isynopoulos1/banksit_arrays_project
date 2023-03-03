@@ -82,7 +82,7 @@ displayMovements(account1.movements);
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${acc.balance} EURO`;
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 // // Display balance in the DOM
@@ -90,25 +90,23 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  0;
   labelSumIn.textContent = `${incomes}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  0;
   // using maths.abs to remove de negative sign
-  labelSumOut.textContent = `${Math.abs(out)}`;
+  labelSumOut.textContent = `${Math.abs(out)}€`;
 
   const interes = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
-      console.log('array', arr);
+      // console.log('array', arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interes}`;
+  labelSumInterest.textContent = `${interes}€`;
 };
 
 calcDisplaySummary(account1);
@@ -123,6 +121,18 @@ const createUserName = function (accs) {
   });
 };
 createUserName(accounts);
+
+// create a function to updating the ui and reuse it in login and transfer
+const updateUi = function (acc) {
+  // display movements
+  displayMovements(acc.movements);
+  //display balance
+  calcDisplayBalance(acc);
+  // display summary
+  calcDisplaySummary(acc);
+};
+
+///////////////////////////////////////
 // Event Handler
 let currentAccount;
 
@@ -133,42 +143,68 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-  if (currentAccount?.pin === Number(inputLoginPin.value))
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // display UI message
     labelWelcome.textContent = `welcome back ${
       currentAccount.owner.split(' ')[0]
     }`;
-  containerApp.style.opacity = 100;
+    containerApp.style.opacity = 100;
 
-  // clear input fields
+    // clear input fields
 
-  inputLoginUsername.value = inputLoginPin.value = ' ';
-  // to blured pin
+    inputLoginUsername.value = inputLoginPin.value = '';
+    // to blured pin
+    inputLoginPin.blur();
 
-  inputLoginPin.blur();
-
-  // display movements
-  displayMovements(currentAccount.movements);
-  //display balance
-  calcDisplayBalance(currentAccount);
-  // display summary
-  calcDisplaySummary(currentAccount);
+    // update ui
+    updateUi(currentAccount);
+  }
 });
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
-  const reciverAccount = accounts.find(
+  const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
-  console.log('amount , user', amount, reciverAccount);
+  inputTransferAmount.value = inputTransferTo.value = '';
+
   if (
     amount > 0 &&
+    receiverAcc &&
     currentAccount.balance >= amount &&
-    reciverAccount?.username !== currentAccount.username
+    receiverAcc?.username !== currentAccount.username
   ) {
-    console.log('transfer valid');
+    //doing transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    // Update UI
+    updateUi(currentAccount);
   }
+});
+
+// close account
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  )
+    console.log('close account!!');
+  const index = accounts.findIndex(
+    acc => acc.username === currentAccount.username
+  );
+  console.log(index);
+
+  //delete account
+  accounts.splice(index, 1);
+
+  // hide UI
+  containerApp.style.opacity = 0;
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 /////////////////////////////////////////////////
@@ -618,3 +654,19 @@ GOOD LUCK 😀
 
 // const accounts2 = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(accounts2);
+
+///////////////////////////////////////SOME AND EVERY
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// FOR EQUALITY
+console.log('includes method', movements.includes(-130));
+
+// FOR CONDITION
+console.log(
+  'some method',
+  movements.some(mov => mov < 0)
+);
+
+const anyDeposit = movements.some(mov => mov > 0);
+console.log('some method in a variable', anyDeposit);
