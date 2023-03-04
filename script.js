@@ -184,6 +184,25 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+//loan btn
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // add movement
+    currentAccount.movements.push(amount);
+
+    // update ui
+    updateUi(currentAccount);
+
+    // crear the input field
+    inputLoanAmount.value = '';
+  }
+});
+
 // close account
 
 btnClose.addEventListener('click', function (e) {
@@ -670,3 +689,53 @@ console.log(
 
 const anyDeposit = movements.some(mov => mov > 0);
 console.log('some method in a variable', anyDeposit);
+
+// every
+// to check every movement > 0 en the accounts (output expected false)
+console.log(movements.every(mov => mov > 0));
+// to check every movement > 0 en the account 4 (output expected true)
+console.log(account4.movements.every(mov => mov > 0));
+
+// separate call back
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
+
+///////////////////////////////////////FLAT AND FLAT  WITH CHAINING
+// flat a nested  array
+const flattedArr = [[1, 2, 3], 3, 4, [3, 4, 5]];
+
+console.log(flattedArr.flat()); // output expected [1, 2, 3, 3, 4, 3, 4, 5]
+
+// flat a second level of nested  array
+const flattedArr2 = [[[1, 2, 3]], [3, 4, 5], [3, 4, 5]];
+console.log(flattedArr2.flat(2)); //output expected [1, 2, 3, 3, 4, 3, 4, 5]
+
+// // mapping all tha acont arrays movemenyts  // [Array(8), Array(8), Array(8), Array(5)]
+// const accMovements = accounts.map(acc => acc.movements);
+// console.log(accMovements);
+// // flatting the array with all the account movements
+// const allMovements = accMovements.flat();
+// console.log(allMovements);
+
+// // to sum all the movements to get one amount //17840
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// to sum all the movements to get one amount with chaining //17840
+const overlBalalceChaining = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(overlBalalceChaining);
+
+///////////////////////////////////////FLATMAP
+// to flat and map in just one method
+
+const overlBalalceChaining2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(overlBalalceChaining2);
