@@ -739,3 +739,24 @@ const overlBalalceChaining2 = accounts
   .reduce((acc, mov) => acc + mov, 0);
 
 console.log(overlBalalceChaining2);
+
+///////////////////////////////////////SORTING STRINGS
+// sorting alphabetically strings
+const owners = ['Isela', 'Erwan', 'Beito', 'Doudou', 'Miawiricio'];
+console.log(owners.sort());
+
+// sorting movemenents array
+// return < 0, A, B(keep order)
+// return > 0, A, B(switch order)
+//ascending
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+console.log(movements);
+//decending
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+console.log(movements);
