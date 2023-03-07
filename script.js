@@ -235,6 +235,7 @@ btnSort.addEventListener('click', function (e) {
   e.preventDefault();
   // using a truthy or falsy value to return the array depending if its sorted or not (!)
   displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
