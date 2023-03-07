@@ -229,9 +229,12 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+// stablishing sorted is false por default
+let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, true);
+  // using a truthy or falsy value to return the array depending if its sorted or not (!)
+  displayMovements(currentAccount.movements, !sorted);
 });
 
 /////////////////////////////////////////////////
