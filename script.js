@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -226,6 +229,11 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, true);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -234,7 +242,7 @@ btnClose.addEventListener('click', function (e) {
 
 ///////////////////////////////////////////////// SIMPLE ARRAYS METHODS
 
-///////////////////////////////////////////////// SLICE METHOD
+///////////////////////////////////////////////// SLICE METHOD  The slice() method returns selected elements in an array, as a new array.
 // let arr = ['a', 'b', 'c', 'd', 'e'];
 // console.log(arr.slice(2)); // output expected [c,d,e]
 // console.log(arr.slice(2, 4)); // output expected [2,4]
@@ -748,15 +756,19 @@ console.log(owners.sort());
 // sorting movemenents array
 // return < 0, A, B(keep order)
 // return > 0, A, B(switch order)
+
 //ascending
-movements.sort((a, b) => {
-  if (a > b) return 1;
-  if (a < b) return -1;
-});
-console.log(movements);
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log('ascending', movements);
+
 //decending
-movements.sort((a, b) => {
-  if (a > b) return -1;
-  if (a < b) return 1;
-});
-console.log(movements);
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log('descending', movements);
