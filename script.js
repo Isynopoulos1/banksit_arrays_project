@@ -238,6 +238,17 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log('MOVEMENTS', movementsUI);
+
+  // also this is the same but then we need to add the map separately
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -776,3 +787,39 @@ console.log('ascending', movements);
 // });
 movements.sort((a, b) => b - a);
 console.log('descending', movements);
+
+///////////////////////////////////////MORE WAYS TO CREATING AND FILLING ARRAYS
+
+// FILL
+//empty arrays + fill method
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const x = new Array(7);
+// filling the empy spaces inside the array
+x.fill(3);
+console.log(x); //output expected [3,3,3,3,3,3,3]
+x.fill(1, 3); // output expected [1,1,1,3,3,3,3]
+console.log(x);
+
+arr.fill(26, 2, 5, 6); //[1, 2, 26, 26, 26, 6, 7]
+console.log(arr);
+
+////////////////////////////////////// array.from
+// output expected: [1, 1, 1, 1, 1, 1, 1]
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+// copying the same array 1-7 using .from // output expected [1, 2, 3, 4, 5, 6, 7]
+
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z);
+
+// example: an array of 100 random numbers
+
+// const random = Array.from({ length: 100 }, () => Math.random());
+
+// console.log(random);
+
+// array methods practice
+
+const bankDeposit = accounts.map(acc => acc.movements);
+console.log('bank deposit', bankDeposit);
