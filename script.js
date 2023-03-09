@@ -845,3 +845,19 @@ console.log(numDeposits1000Reduce);
 let a = 10;
 console.log(++a);
 console.log(a);
+
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      cur >= 1000 ? (sums.deposits += cur) : (sums.withdrawals += cur), 0;
+
+      return sums;
+    },
+    {
+      deposits: 0,
+      withdrawals: 0,
+    }
+  );
+
+console.log(sums);
