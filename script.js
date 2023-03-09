@@ -819,7 +819,29 @@ console.log(z);
 
 // console.log(random);
 
-// array methods practice
+// flatten an array and returning just positive values with filter and sum all the values with reduce
 
-const bankDeposit = accounts.map(acc => acc.movements);
+//1
+const bankDeposit = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
 console.log('bank deposit', bankDeposit);
+
+//2
+// to get the num of deposits
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 1000).length;
+// console.log(numDeposits1000);
+
+const numDeposits1000Reduce = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+
+console.log(numDeposits1000Reduce);
+
+// prefixed operator
+let a = 10;
+console.log(++a);
+console.log(a);
