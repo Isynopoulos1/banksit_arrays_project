@@ -826,7 +826,7 @@ const bankDeposit = accounts
   .flatMap(acc => acc.movements)
   .filter(mov => mov > 0)
   .reduce((sum, cur) => sum + cur, 0);
-console.log('bank deposit', bankDeposit);
+// console.log('bank deposit', bankDeposit);
 
 //2
 // to get the num of deposits
@@ -839,18 +839,20 @@ const numDeposits1000Reduce = accounts
   .flatMap(acc => acc.movements)
   .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
 
-console.log(numDeposits1000Reduce);
+// console.log(numDeposits1000Reduce);
 
 // prefixed operator
 let a = 10;
-console.log(++a);
-console.log(a);
+// console.log(++a);
+// console.log(a);
 
-const sums = accounts
+//3
+const { deposits, withdrawals } = accounts
   .flatMap(acc => acc.movements)
   .reduce(
     (sums, cur) => {
-      cur >= 1000 ? (sums.deposits += cur) : (sums.withdrawals += cur), 0;
+      // cur >= 1000 ? (sums.deposits += cur) : (sums.withdrawals += cur), 0;
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
 
       return sums;
     },
@@ -860,4 +862,23 @@ const sums = accounts
     }
   );
 
-console.log(sums);
+// console.log(deposits, withdrawals);
+
+// 4
+
+// this is a nice title, This is a nice title
+
+const tittleExample = function (title) {
+  const exeptions = ['of', 'is', 'a', 'the'];
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exeptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+console.log(tittleExample('THIS IS a nice long title'));
+console.log(tittleExample('this a nice long title'));
+console.log(tittleExample('THIS IS a nice ANOTHER EXAMPLE OF long title'));
