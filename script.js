@@ -702,38 +702,38 @@ GOOD LUCK 😀
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // FOR EQUALITY
-console.log('includes method', movements.includes(-130));
+// console.log('includes method', movements.includes(-130));
 
-// FOR CONDITION
-console.log(
-  'some method',
-  movements.some(mov => mov < 0)
-);
+// // FOR CONDITION
+// console.log(
+//   'some method',
+//   movements.some(mov => mov < 0)
+// );
 
 const anyDeposit = movements.some(mov => mov > 0);
-console.log('some method in a variable', anyDeposit);
+// console.log('some method in a variable', anyDeposit);
 
 // every
-// to check every movement > 0 en the accounts (output expected false)
-console.log(movements.every(mov => mov > 0));
-// to check every movement > 0 en the account 4 (output expected true)
-console.log(account4.movements.every(mov => mov > 0));
+// // to check every movement > 0 en the accounts (output expected false)
+// console.log(movements.every(mov => mov > 0));
+// // to check every movement > 0 en the account 4 (output expected true)
+// console.log(account4.movements.every(mov => mov > 0));
 
 // separate call back
 const deposit = mov => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
 
 ///////////////////////////////////////FLAT AND FLAT  WITH CHAINING
 // flat a nested  array
 const flattedArr = [[1, 2, 3], 3, 4, [3, 4, 5]];
 
-console.log(flattedArr.flat()); // output expected [1, 2, 3, 3, 4, 3, 4, 5]
+// console.log(flattedArr.flat()); // output expected [1, 2, 3, 3, 4, 3, 4, 5]
 
 // flat a second level of nested  array
 const flattedArr2 = [[[1, 2, 3]], [3, 4, 5], [3, 4, 5]];
-console.log(flattedArr2.flat(2)); //output expected [1, 2, 3, 3, 4, 3, 4, 5]
+// console.log(flattedArr2.flat(2)); //output expected [1, 2, 3, 3, 4, 3, 4, 5]
 
 // // mapping all tha acont arrays movemenyts  // [Array(8), Array(8), Array(8), Array(5)]
 // const accMovements = accounts.map(acc => acc.movements);
@@ -752,7 +752,7 @@ const overlBalalceChaining = accounts
   .flat()
   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(overlBalalceChaining);
+// console.log(overlBalalceChaining);
 
 ///////////////////////////////////////FLATMAP
 // to flat and map in just one method
@@ -761,12 +761,12 @@ const overlBalalceChaining2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(overlBalalceChaining2);
+// console.log(overlBalalceChaining2);
 
 ///////////////////////////////////////SORTING STRINGS
 // sorting alphabetically strings
 const owners = ['Isela', 'Erwan', 'Beito', 'Doudou', 'Miawiricio'];
-console.log(owners.sort());
+// console.log(owners.sort());
 
 // sorting movemenents array
 // return < 0, A, B(keep order)
@@ -778,7 +778,7 @@ console.log(owners.sort());
 //   if (a < b) return -1;
 // });
 movements.sort((a, b) => a - b);
-console.log('ascending', movements);
+// console.log('ascending', movements);
 
 //decending
 // movements.sort((a, b) => {
@@ -786,7 +786,7 @@ console.log('ascending', movements);
 //   if (a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
-console.log('descending', movements);
+// console.log('descending', movements);
 
 ///////////////////////////////////////MORE WAYS TO CREATING AND FILLING ARRAYS
 
@@ -796,22 +796,22 @@ const arr = [1, 2, 3, 4, 5, 6, 7];
 const x = new Array(7);
 // filling the empy spaces inside the array
 x.fill(3);
-console.log(x); //output expected [3,3,3,3,3,3,3]
+// console.log(x); //output expected [3,3,3,3,3,3,3]
 x.fill(1, 3); // output expected [1,1,1,3,3,3,3]
-console.log(x);
+// console.log(x);
 
 arr.fill(26, 2, 5, 6); //[1, 2, 26, 26, 26, 6, 7]
-console.log(arr);
+// console.log(arr);
 
 ////////////////////////////////////// array.from
 // output expected: [1, 1, 1, 1, 1, 1, 1]
 const y = Array.from({ length: 7 }, () => 1);
-console.log(y);
+// console.log(y);
 
 // copying the same array 1-7 using .from // output expected [1, 2, 3, 4, 5, 6, 7]
 
 const z = Array.from({ length: 7 }, (cur, i) => i + 1);
-console.log(z);
+// console.log(z);
 
 // example: an array of 100 random numbers
 
@@ -879,6 +879,61 @@ const tittleExample = function (title) {
     .join(' ');
   return capitalize(titleCase);
 };
-console.log(tittleExample('THIS IS a nice long title'));
-console.log(tittleExample('this a nice long title'));
-console.log(tittleExample('THIS IS a nice ANOTHER EXAMPLE OF long title'));
+// console.log(tittleExample('THIS IS a nice long title'));
+// console.log(tittleExample('this a nice long title'));
+// console.log(tittleExample('THIS IS a nice ANOTHER EXAMPLE OF long title'));
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Julia and Kate are still studying dogs, and this time they are studying if dogs are eating too much or too little.
+Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it to the object as a new property. Do NOT create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is any dog eating EXACTLY the amount of food that is recommended (just true or false)
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+
+TEST DATA:
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+GOOD LUCK 😀
+*/
+
+//test data
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+//  recommended Food
+const recommendedFood = function (weight) {
+  const formula = weight ** 0.75 * 28;
+  return formula;
+};
+
+const loopDogs = doggies => {
+  return doggies.forEach(dog => {
+    console.log('dog weight', dog.weight);
+    const res = recommendedFood(dog.weight);
+    console.log('result formula', res);
+  });
+};
+
+loopDogs(dogs);
