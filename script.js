@@ -630,13 +630,13 @@ GOOD LUCK 😀
 
 ///////////////// SOLUTION 2
 
-// const avgTotal = function (ages) {
-//   const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-//   const adults = dogAges.filter(age => age > 18);
-//   const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
-//   // const avg = adults.reduce (( accu, age,  i, arr) => acc + age / arr. length 0)
-//   return avg;
-// };
+const avgTotal = function (ages) {
+  const dogAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = dogAges.filter(age => age > 18);
+  const avg = adults.reduce((acc, cur) => acc + cur / adults.length, 0);
+  // const avg = adults.reduce (( accu, age,  i, arr) => acc + age / arr. length 0)
+  return avg;
+};
 
 // const avg1 = [5, 2, 4, 1, 15, 8, 3];
 // const avg2 = [16, 6, 10, 5, 6, 1, 4];
@@ -933,7 +933,7 @@ const loopDogs = doggies => {
   return doggies.forEach(dog => {
     console.log('dog weight', dog.weight);
     const res = recommendedFood(dog.weight);
-    console.log('result formula', res);
+    console.log('grams recommended', res);
   });
 };
 
@@ -946,4 +946,35 @@ console.log(sarahsDog);
 const sarasDogFood = recommendedFood(sarahsDog.weight);
 console.log(sarasDogFood);
 
-//3
+// 3 function to get the portion
+// const tooMuchPortion = dogs
+//   // .filter(dog => dog.curFood > recommendedFood(dog.weight))
+//   .map(dog => {
+//     const recFood = recommendedFood(dog.weight);
+//     const isOverweight = dog.curFood > recFood;
+
+//     return console.log(
+//       `the dog recommended food is ${recFood.toFixed(
+//         2
+//       )} and since the dog food is ${dog.curFood} then the dog is ${
+//         isOverweight ? 'overweight' : 'healthy'
+//       }`
+//     );
+//   });
+
+// create a new array with all owners
+const allPortions = dogs.flatMap(dog => {
+  const string = `the owner ${dog.owners} have a dog with a weight of ${dog.weight}`;
+  return console.log(string);
+});
+
+//4  mapping the recommended portion with all the owners
+
+const isTheRightPortion = dogs.map(dog => {
+  const recFood = recommendedFood(dog.weight);
+  const isOverWeight =
+    dog.curFood > recFood ? 'overweight' : 'is eating the right portion';
+  console.log(`the dog of ${dog.owners} is ${isOverWeight} '`);
+});
+
+const allOwners = dogs.forEach(dog => console.log(dog.owners));
