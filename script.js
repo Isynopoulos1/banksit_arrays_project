@@ -910,7 +910,7 @@ const dogs = [
   { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
   { weight: 32, curFood: 340, owners: ['Michael'] }
 ];
-
+ 
 GOOD LUCK 😀
 */
 
@@ -923,6 +923,7 @@ const dogs = [
 ];
 
 //  recommended Food
+//1
 const recommendedFood = function (weight) {
   const formula = weight ** 0.75 * 28;
   return formula;
@@ -937,3 +938,12 @@ const loopDogs = doggies => {
 };
 
 loopDogs(dogs);
+
+//2
+const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahsDog);
+
+const sarasDogFood = recommendedFood(sarahsDog.weight);
+console.log(sarasDogFood);
+
+//3
