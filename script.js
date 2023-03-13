@@ -924,90 +924,139 @@ const dogs = [
 
 //  recommended Food
 //1
-const recommendedFood = function (weight) {
-  const formula = weight ** 0.75 * 28;
-  return formula;
-};
+// const recommendedFood = function (weight) {
+//   const formula = weight ** 0.75 * 28;
+//   return formula;
+// };
 
-const loopDogs = doggies => {
-  return doggies.forEach(dog => {
-    console.log('dog weight', dog.weight);
-    const res = recommendedFood(dog.weight);
-    console.log('grams recommended', res);
-  });
-};
-
-loopDogs(dogs);
-
-//2
-const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
-console.log(sarahsDog);
-
-const sarasDogFood = recommendedFood(sarahsDog.weight);
-console.log(sarasDogFood);
-
-// 3 function to get the portion
-// const tooMuchPortion = dogs
-//   // .filter(dog => dog.curFood > recommendedFood(dog.weight))
-//   .map(dog => {
-//     const recFood = recommendedFood(dog.weight);
-//     const isOverweight = dog.curFood > recFood;
-
-//     return console.log(
-//       `the dog recommended food is ${recFood.toFixed(
-//         2
-//       )} and since the dog food is ${dog.curFood} then the dog is ${
-//         isOverweight ? 'overweight' : 'healthy'
-//       }`
-//     );
+// const loopDogs = doggies => {
+//   return doggies.forEach(dog => {
+//     console.log('dog weight', dog.weight);
+//     const res = recommendedFood(dog.weight);
+//     console.log('grams recommended', res);
 //   });
+// };
 
-// create a new array with all owners
-const allPortions = dogs.flatMap(dog => {
-  const string = `the owner ${dog.owners} have a dog with a weight of ${dog.weight}`;
-  return console.log(string);
-});
+// loopDogs(dogs);
 
-//4  mapping the recommended portion with all the owners
+// //2
+// const sarahsDog = dogs.find(dog => dog.owners.includes('Sarah'));
+// console.log(sarahsDog);
 
-const isTheRightPortion = dogs.map(dog => {
-  const recFood = recommendedFood(dog.weight);
-  const isOverWeight =
-    dog.curFood > recFood ? 'overweight' : 'is eating the right portion';
-  console.log(`the dog of ${dog.owners} is ${isOverWeight} '`);
-});
+// const sarasDogFood = recommendedFood(sarahsDog.weight);
+// console.log(sarasDogFood);
 
-const allOwners = dogs.forEach(dog => console.log(dog.owners));
+// // 3 function to get the portion
+// // const tooMuchPortion = dogs
+// //   // .filter(dog => dog.curFood > recommendedFood(dog.weight))
+// //   .map(dog => {
+// //     const recFood = recommendedFood(dog.weight);
+// //     const isOverweight = dog.curFood > recFood;
 
-//5 mapping the recommended portion with all the owners
-const matchingFood = dogs.find(
-  dog => dog.curFood === recommendedFood(dog.weight)
+// //     return console.log(
+// //       `the dog recommended food is ${recFood.toFixed(
+// //         2
+// //       )} and since the dog food is ${dog.curFood} then the dog is ${
+// //         isOverweight ? 'overweight' : 'healthy'
+// //       }`
+// //     );
+// //   });
+
+// // create a new array with all owners
+// const allPortions = dogs.flatMap(dog => {
+//   const string = `the owner ${dog.owners} have a dog with a weight of ${dog.weight}`;
+//   return console.log(string);
+// });
+
+// //4  mapping the recommended portion with all the owners
+
+// const isTheRightPortion = dogs.map(dog => {
+//   const recFood = recommendedFood(dog.weight);
+//   const isOverWeight =
+//     dog.curFood > recFood ? 'overweight' : 'is eating the right portion';
+//   console.log(`the dog of ${dog.owners} is ${isOverWeight} '`);
+// });
+
+// const allOwners = dogs.forEach(dog => console.log(dog.owners));
+
+// //5 mapping the recommended portion with all the owners
+// const matchingFood = dogs.find(
+//   dog => dog.curFood === recommendedFood(dog.weight)
+// );
+
+// if (matchingFood) {
+//   console.log('true', true);
+// } else {
+//   console.log('false', false);
+// }
+
+// //6 is any dog eating an OKAY amount of food
+// const rightFood = dogs.find(dog => dog.curFood <= recommendedFood(dog.weight));
+
+// if (rightFood) {
+//   console.log('true', true);
+// } else {
+//   console.log('false', false);
+// }
+
+// console.log('THE RIGHT FOOD', rightFood);
+
+// // 7 Create an array containing the dogs that are eating an OKAY amount of food
+// const theOkAmount = dogs.find(
+//   dog => dog.curFood <= recommendedFood(dog.weight)
+// );
+
+// const ownersArr = dogs
+//   .filter(dog => dog.curFood < recommendedFood(dog.weight))
+//   .flatMap(dog => dog.owners);
+
+// console.log('OWNERS OK FOOD', ownersArr);
+
+// SOLUTION
+
+//1
+dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)));
+console.log(dogs);
+//2
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahDog);
+//3
+console.log(
+  `sarahs dog is eating ${
+    sarahDog.curFood < sarahDog.recFood ? 'food' : sarahDog.recFood
+  }`
 );
 
-if (matchingFood) {
-  console.log('true', true);
-} else {
-  console.log('false', false);
-}
-
-//6 is any dog eating an OKAY amount of food
-const rightFood = dogs.find(dog => dog.curFood <= recommendedFood(dog.weight));
-
-if (rightFood) {
-  console.log('true', true);
-} else {
-  console.log('false', false);
-}
-
-console.log('THE RIGHT FOOD', rightFood);
-
-// 7 Create an array containing the dogs that are eating an OKAY amount of food
-const theOkAmount = dogs.find(
-  dog => dog.curFood <= recommendedFood(dog.weight)
-);
-
-const ownersArr = dogs
-  .filter(dog => dog.curFood < recommendedFood(dog.weight))
+//4
+const ownersEatingTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
   .flatMap(dog => dog.owners);
 
-console.log('OWNERS OK FOOD', ownersArr);
+console.log(ownersEatingTooMuch);
+console.log(`${ownersEatingTooMuch.join(' and ')} dogs eat too much`);
+
+const ownersEtingTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownersEtingTooLittle);
+
+//5
+
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+//6  current > (recommended * 0.90) && current < (recommended * 1.10)
+
+const eatingOk = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+console.log(dogs.some(eatingOk));
+
+// 7
+console.log(dogs.filter(eatingOk));
+
+//8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order
+
+//The slice() method returns selected elements in an array, as a new array.
+
+const dogsSorted = dogs.slice().sort((a, b) => a.curFood - b.recFood);
+console.log(dogsSorted);
