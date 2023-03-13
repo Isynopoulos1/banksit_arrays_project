@@ -978,3 +978,36 @@ const isTheRightPortion = dogs.map(dog => {
 });
 
 const allOwners = dogs.forEach(dog => console.log(dog.owners));
+
+//5 mapping the recommended portion with all the owners
+const matchingFood = dogs.find(
+  dog => dog.curFood === recommendedFood(dog.weight)
+);
+
+if (matchingFood) {
+  console.log('true', true);
+} else {
+  console.log('false', false);
+}
+
+//6 is any dog eating an OKAY amount of food
+const rightFood = dogs.find(dog => dog.curFood <= recommendedFood(dog.weight));
+
+if (rightFood) {
+  console.log('true', true);
+} else {
+  console.log('false', false);
+}
+
+console.log('THE RIGHT FOOD', rightFood);
+
+// 7 Create an array containing the dogs that are eating an OKAY amount of food
+const theOkAmount = dogs.find(
+  dog => dog.curFood <= recommendedFood(dog.weight)
+);
+
+const ownersArr = dogs
+  .filter(dog => dog.curFood < recommendedFood(dog.weight))
+  .flatMap(dog => dog.owners);
+
+console.log('OWNERS OK FOOD', ownersArr);
